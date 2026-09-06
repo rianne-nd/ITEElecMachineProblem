@@ -4,8 +4,35 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
+
+    <!-- Materialize CSS CDN -->estored AngularJS module, controller, and service files
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+
+    <!-- Material Design Icons CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-icons/3.0.1/iconfont/material-icons.min.css">
+
+    <!-- SweetAlert2 CSS CDN -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+
 </head>
-<body ng-app="ITEWebApplicationProjectModule" ng-controller="ITEWebApplicationProjectController">
+<body ng-app="ITEWebApplicationProjectModule" ng-controller="ITEWebApplicationProjectController"
+    
+    <!-- Global Header Navigation -->
+    <header>
+        <nav class="blue darken-3">
+            <div class="nav-wrapper">
+                <a href="#!" class="brand-logo"><i class="material-icons left">business</i>EMS Portal</a>
+                <ul id="nav-mobile" class="right hide-on-med-and-down">
+                    <li><a ng-click="redirectFunc('/Main/Index')"><i class="material-icons left">home</i>Home</a></li>
+                    <li><a ng-click="redirectFunc('/Main/RegistrationPage')"><i class="material-icons left">person_add</i>Registration</a></li>
+                    <li><a ng-click="redirectFunc('/Main/AboutPage')"><i class="material-icons left">info</i>About</a></li>
+                    <li><a ng-click="redirectFunc('/Main/ContactPage')"><i class="material-icons left">contacts</i>Contact</a></li>
+                    <li><a ng-click="redirectFunc('/Main/LoginPage')"><i class="material-icons left">lock</i>Logout</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
     <div>
         @RenderBody()
     </div>
