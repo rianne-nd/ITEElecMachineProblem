@@ -1,0 +1,1 @@
+﻿app.service('ITEWebApplicationProjectService', function ($http) { });
