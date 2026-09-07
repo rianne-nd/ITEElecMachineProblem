@@ -3,3 +3,76 @@
 }
 
 <h4>Registration Page</h4>
+
+
+<div>
+    <input id="emp_id" type="text" ng-model="empID" />
+    <label for="emp_id">Employee ID</label>
+</div>
+<div>
+    <input id="first_name" type="text" ng-model="firstName" />
+    <label for="first_name">First Name</label>
+</div>
+<div>
+    <input id="middle_name" type="text" ng-model="middleName" />
+    <label for="middle_name">Middle Name</label>
+</div>
+<div>
+    <input id="last_name" type="text" ng-model="lastName" />
+    <label for="last_name">Last Name</label>
+</div>
+<div>
+    <input id="username" type="text" ng-model="username" />
+    <label for="username">Username</label>
+</div>
+<div>
+    <input id="email" type="email" ng-model="email" />
+    <label for="email">Email</label>
+</div>
+<div>
+    <input id="password" type="password" ng-model="password" />
+    <label for="password">Password</label>
+</div>
+<div>
+    <input id="confirm_password" type="password" ng-model="confirmPassword" />
+    <label for="confirm_password">Confirm Password</label>
+</div>
+<div>
+    <input id="contact_number" type="text" ng-model="contactNumber" />
+    <label for="contact_number">Contact Number</label>
+</div>
+<div>
+    <input id="position" type="text" ng-model="position" />
+    <label for="position">Position</label>
+</div>
+<div>
+    <input id="department" type="text" ng-model="department" />
+    <label for="department">Department</label>
+</div>
+
+<button ng-click="registrationFunc()">Register</button>
+<button ng-click="updateFunc()">Update</button>
+
+<table>
+    <tr>
+        <th>Employee ID</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Username</th>
+        <th>Email</th>
+        <th>Position</th>
+        <th>Action</th>
+    </tr>
+    <tr ng-repeat="udata in userarray">
+        <td>{{udata.EmpID}}</td>
+        <td>{{udata.FName}}</td>
+        <td>{{udata.LName}}</td>
+        <td>{{udata.Username}}</td>
+        <td>{{udata.Email}}</td>
+        <td>{{udata.Position}}</td>
+        <td>
+            <button ng-click="editFunc($index)">Edit</button>
+            <button ng-click="deleteFunc($index)">Delete</button>
+        </td>
+    </tr>
+</table>

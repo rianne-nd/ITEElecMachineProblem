@@ -23,7 +23,7 @@
         window.location.href = '/Main/Index';
     }
 
-    $scope.clearFunc = function () {
+    $scope.clearLoginFunc = function () {
         $scope.loginUsername = '';
         $scope.loginPassword = '';
     }
