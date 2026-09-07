@@ -1,1 +1,1 @@
-﻿var app = angular.module('ITEWebApplicationProjectModule', []);
+﻿var app = angular.module("ITEElecMachineProblemModule", []);

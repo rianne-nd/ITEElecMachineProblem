@@ -1,0 +1,17 @@
+﻿@{
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<h4>Login</h4>
+<div class="input-field">
+    <input id="txtLoginUsername" type="text" ng-model="loginUsername" />
+    <label for="txtLoginUsername">Username</label>
+</div>
+<div class="input-field">
+    <input id="txtLoginPassword" type="password" ng-model="loginPassword" />
+    <label for="txtLoginPassword">Password</label>
+</div>
+<a class="btn blue" ng-click="redirectFunc('/Main/Index')"> Login </a>
+<a class="btn grey" ng-click="clearFunc()"> Clear </a>
+
+<p>Dont have an account? <a href="" ng-click="redirectFunc('/Main/RegistrationPage')">Register here</a></p>

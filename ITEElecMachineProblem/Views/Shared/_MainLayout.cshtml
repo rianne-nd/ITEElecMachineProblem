@@ -1,11 +1,11 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
 
-    <!-- Materialize CSS CDN -->estored AngularJS module, controller, and service files
+    <!-- Materialize CSS CDN -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
 
     <!-- Material Design Icons CDN -->
@@ -15,9 +15,9 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
 
 </head>
-<body ng-app="ITEWebApplicationProjectModule" ng-controller="ITEWebApplicationProjectController"
-    
-    <!-- Global Header Navigation -->
+<body ng-app="ITEElecMachineProblemModule" ng-controller="ITEElecMachineProblemController">
+
+    <!-- Header -->
     <header>
         <nav class="blue darken-3">
             <div class="nav-wrapper">
@@ -37,16 +37,45 @@
         @RenderBody()
     </div>
 
+
+
+    <!-- Footer -->
+    <footer class="page-footer blue darken-3">
+        <div class="container">
+            <div class="row">
+                <div class="col l6 s12">
+                    <h5 class="white-text"><i class="material-icons left">business</i>EMS Portal</h5>
+                    <p class="grey-text text-lighten-4">Employee Management System — managing employee records simply and efficiently.</p>
+                </div>
+                <div class="col l4 offset-l2 s12">
+                    <h5 class="white-text">Quick Links</h5>
+                    <ul>
+                        <li><a class="grey-text text-lighten-3" ng-click="redirectFunc('/Main/Index')">Home</a></li>
+                        <li><a class="grey-text text-lighten-3" ng-click="redirectFunc('/Main/RegistrationPage')">Registration</a></li>
+                        <li><a class="grey-text text-lighten-3" ng-click="redirectFunc('/Main/AboutPage')">About</a></li>
+                        <li><a class="grey-text text-lighten-3" ng-click="redirectFunc('/Main/ContactPage')">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer-copyright">
+            <div class="container">
+                © @DateTime.Now.Year EMS Portal
+            </div>
+        </div>
+    </footer>
+
+
     <!-- JavaScript Dependencies -->
-    <script src="~/Scripts/jquery-3.7.0.min.js"></script>
+    <script src="@Url.Content("~/Scripts/jquery-3.7.0.min.js")"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.all.min.js"></script>
-    <script src="~/Scripts/angular.min.js"></script>
+    <script src="@Url.Content("~/Scripts/angular.min.js")"></script>
 
     <!-- Application Scripts -->
-    <script src="~/Scripts/HolyScripts/Module.js"></script>
-    <script src="~/Scripts/HolyScripts/Service.js"></script>
-    <script src="~/Scripts/HolyScripts/Controller.js"></script>
+    <script src="@Url.Content("~/Scripts/HolyScripts/Module.js")"></script>
+    <script src="@Url.Content("~/Scripts/HolyScripts/Service.js")"></script>
+    <script src="@Url.Content("~/Scripts/HolyScripts/Controller.js")"></script>
 
 </body>
 </html>

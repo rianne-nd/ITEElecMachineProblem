@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -14,25 +14,31 @@ namespace ITEElecMachineProblem.Controllers
             return View();
         }
 
-        public ActionResult Login()
+        public ActionResult LoginPage()
         {
             return View();
         }
 
-        public ActionResult Registration()
+        public ActionResult RegistrationPage()
         {
             return View();
         }
 
-        public ActionResult Home()
+        public ActionResult AboutPage()
         {
             return View();
         }
 
-        public ActionResult About()
+        public ActionResult ContactPage()
         {
             return View();
         }
 
+        public JsonResult GetWelcomeMessage()
+        {
+            return Json("Welcome to the Employee Management System!", JsonRequestBehavior.AllowGet);
+        }
+
+        
     }
 }
