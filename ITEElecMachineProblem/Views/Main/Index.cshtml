@@ -1,6 +1,14 @@
-﻿@{
+@{
     Layout = "~/Views/Shared/_MainLayout.cshtml";
 }
 
+<div class="container center-align" style="margin-top: 60px;" ng-init="GetWelcomeMessage()">
 
-<h4 ng-init="GetWelcomeMessage()">Home Dashboard</h4>
+    <i class="material-icons large blue-text text-darken-3">home</i>
+    <h4 class="blue-text text-darken-3">Home Dashboard</h4>
+    <p class="flow-text">Welcome to EMS Portal — manage your employees easily.</p>
+
+    <a class="btn blue darken-3" ng-click="redirectFunc('/Main/RegistrationPage')">Register Employee</a>
+    <a class="btn grey" ng-click="redirectFunc('/Main/ContactPage')">Contact Us</a>
+
+</div>
