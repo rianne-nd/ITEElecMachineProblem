@@ -2,16 +2,60 @@
     Layout = "~/Views/Shared/_MainLayout.cshtml";
 }
 
-<div class="container" style="margin-top: 30px;">
+<div class="dot-grid py-12 px-4 md:px-8 relative overflow-hidden">
+    <div class="absolute -bottom-10 -left-10 w-56 h-56 rounded-full bg-primary-fixed-dim/20 blur-3xl pointer-events-none"></div>
 
-    <h4 class="blue-text text-darken-3">Contact Us</h4>
+    <div class="max-w-4xl mx-auto relative z-10">
 
-    <p>Have a question or feedback? Reach us through any of the following:</p>
+        <div class="bg-surface-container-lowest rounded-3xl shadow-xl border-2 border-dashed border-outline-variant/30 p-8 md:p-12">
 
-    <ul>
-        <li>Email: <a href="mailto:support@emsportal.com">support@emsportal.com</a></li>
-        <li>Phone: <a href="tel:+63212345678">(02) 1234 5678</a></li>
-        <li>Office: 123 Example Street, Barangay Sample, City</li>
-    </ul>
+            <div class="flex items-center gap-3">
+                <div class="w-14 h-14 rounded-2xl bg-primary-fixed flex items-center justify-center text-on-primary-fixed-variant">
+                    <span class="material-symbols-outlined text-3xl">contacts</span>
+                </div>
+                <div>
+                    <h1 class="text-3xl font-headline font-extrabold text-primary tracking-tight">Contact Us</h1>
+                    <p class="text-on-surface-variant text-sm">We would love to hear from you</p>
+                </div>
+            </div>
 
+            <p class="text-on-surface-variant mt-8">
+                Have a question or feedback? Reach us through any of the following:
+            </p>
+
+            <div class="space-y-4 mt-6">
+
+                <a class="flex items-center gap-4 p-5 rounded-2xl bg-surface-container-low border-2 border-dashed border-outline-variant/30 hover:border-secondary transition-colors" href="mailto:edriannejohn.puno.cics@ust.edu.ph">
+                    <div class="w-12 h-12 rounded-xl bg-tertiary-fixed flex items-center justify-center text-on-tertiary-fixed-variant">
+                        <span class="material-symbols-outlined">mail</span>
+                    </div>
+                    <div>
+                        <p class="text-[10px] font-bold tracking-[0.2em] uppercase text-on-surface-variant">Email</p>
+                        <p class="text-on-surface font-semibold">edriannejohn.puno.cics@ust.edu.ph</p>
+                    </div>
+                </a>
+
+                <a class="flex items-center gap-4 p-5 rounded-2xl bg-surface-container-low border-2 border-dashed border-outline-variant/30 hover:border-secondary transition-colors" href="tel:+639763615092">
+                    <div class="w-12 h-12 rounded-xl bg-secondary-container flex items-center justify-center text-on-secondary-container">
+                        <span class="material-symbols-outlined">call</span>
+                    </div>
+                    <div>
+                        <p class="text-[10px] font-bold tracking-[0.2em] uppercase text-on-surface-variant">Phone</p>
+                        <p class="text-on-surface font-semibold">09763615092</p>
+                    </div>
+                </a>
+
+                <div class="flex items-center gap-4 p-5 rounded-2xl bg-surface-container-low border-2 border-dashed border-outline-variant/30">
+                    <div class="w-12 h-12 rounded-xl bg-primary-fixed flex items-center justify-center text-on-primary-fixed-variant">
+                        <span class="material-symbols-outlined">location_on</span>
+                    </div>
+                    <div>
+                        <p class="text-[10px] font-bold tracking-[0.2em] uppercase text-on-surface-variant">Office</p>
+                        <p class="text-on-surface font-semibold">Espana Blvd, Sampaloc, Manila, 1000 Metro Manila</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
 </div>

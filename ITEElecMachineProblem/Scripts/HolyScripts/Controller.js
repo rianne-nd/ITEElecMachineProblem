@@ -1,7 +1,6 @@
-﻿app.controller('ITEElecMachineProblemController', function ($scope, ITEElecMachineProblemService) {
+app.controller('ITEElecMachineProblemController', function ($scope, ITEElecMachineProblemService) {
 
     $scope.userArray = [];
-    $scope.editingIndex = -1;
 
     $scope.redirectFunc = function (targetURL) {
         window.location.href = targetURL;
@@ -41,10 +40,11 @@
         $scope.contactNumber = '';
         $scope.position = '';
         $scope.department = '';
-        $scope.editingIndex = -1;
     };
 
-    $scope.validateForm = function () {
+    // userindex = the row being edited, or -1 when registering a new record
+    $scope.validateForm = function (userindex) {
+
         if ($scope.firstName == undefined || $scope.firstName == '') {
             Swal.fire({
                 title: 'Notification!',
@@ -126,10 +126,10 @@
             return false;
         }
 
-        // Uniqueness (skip the row currently being edited)
+        // Uniqueness (skip the row being updated)
         for (var i = 0; i < $scope.userArray.length; i++) {
 
-            if (i == $scope.editingIndex) {
+            if (i == userindex) {
                 continue;
             }
             if ($scope.userArray[i].EmpID == $scope.empID) {
@@ -163,7 +163,7 @@
 
     $scope.registrationFunc = function () {
 
-        if ($scope.validateForm() == false) {
+        if ($scope.validateForm(-1) == false) {
             return;
         }
 
@@ -190,6 +190,7 @@
         $scope.clearRegistrationFunc();
     }
 
+    // Loads the clicked row into the form
     $scope.editFunc = function (index) {
         var row = $scope.userArray[index];
 
@@ -204,25 +205,16 @@
         $scope.contactNumber = row.ContactNumber;
         $scope.position = row.Position;
         $scope.department = row.Department;
-        $scope.editingIndex = index;
     };
 
-    $scope.updateFunc = function () {
-        if ($scope.editingIndex === -1 ) { //if its in editting mode
-            Swal.fire({
-                title: 'Notification!',
-                text: 'Click EDIT on a row first.',
-                icon: 'error'
-            });
+    // Saves the form into the row that called it
+    $scope.updateFunc = function (userindex) {
 
+        if ($scope.validateForm(userindex) == false) {
             return;
         }
 
-        if ($scope.validateForm() == false) {
-            return;
-        }
-
-        var row = $scope.userArray[$scope.editingIndex];
+        var row = $scope.userArray[userindex];
         row.EmpID = $scope.empID;
         row.FName = $scope.firstName;
         row.MName = $scope.middleName;
@@ -234,15 +226,12 @@
         row.Position = $scope.position;
         row.Department = $scope.department;
 
-        $scope.editingIndex = -1;
-
         Swal.fire({
             title: 'Notification!',
             text: 'Updated Successfully!',
             icon: 'success',
             confirmButtonText: 'OK'
         });
-           
 
         $scope.clearRegistrationFunc();
     };

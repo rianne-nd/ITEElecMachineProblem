@@ -2,99 +2,232 @@
     Layout = "~/Views/Shared/_MainLayout.cshtml";
 }
 
-<div class="container" style="margin-top: 30px;">
+<div class="dot-grid py-10 px-4 md:px-8">
+    <div class="max-w-6xl mx-auto">
 
-    <h4 class="blue-text text-darken-3">Registration Page</h4>
+        <!-- Main Card -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 rounded-[3rem] overflow-hidden bg-surface-container shadow-2xl">
 
-    <div class="card">
-        <div class="card-content">
-            <div class="row">
-                <div class="input-field col s12 m6">
-                    <input id="emp_id" type="text" ng-model="empID" placeholder="Employee ID" />
-                    <span class="helper-text">Required. numbers only.</span>
+            <!-- Left: Introduction / Features -->
+            <section class="hidden lg:flex flex-col justify-center p-12 relative bg-surface-container-highest overflow-hidden">
+                <div class="absolute -top-10 -left-10 w-40 h-40 rounded-full bg-secondary-container/30 blur-3xl"></div>
+                <div class="absolute bottom-20 right-10 w-64 h-64 rounded-full bg-primary-fixed-dim/20 blur-3xl"></div>
+
+                <div class="relative z-10">
+                    <span class="inline-block px-4 py-1.5 rounded-full bg-primary text-on-primary text-[10px] font-bold tracking-[0.2em] uppercase">Employee Portal</span>
+
+                    <h1 class="text-5xl font-headline font-extrabold text-primary tracking-tighter leading-tight mt-6 mb-8">
+                        Manage your <br><span class="text-secondary italic">Workforce</span>
+                    </h1>
+
+                    <div class="space-y-6">
+                        <div class="group flex items-start space-x-4 p-5 rounded-2xl bg-surface-container-lowest border-2 border-dashed border-outline-variant/30 hover:border-secondary transition-colors translate-x-4">
+                            <div class="flex-shrink-0 w-12 h-12 rounded-xl bg-tertiary-fixed flex items-center justify-center text-on-tertiary-fixed-variant group-hover:-rotate-6 transition-transform">
+                                <span class="material-symbols-outlined">groups</span>
+                            </div>
+                            <div>
+                                <h3 class="font-headline font-bold text-on-surface">Central Records</h3>
+                                <p class="text-on-surface-variant text-sm mt-1">Keep every employee's details organized in one place.</p>
+                            </div>
+                        </div>
+
+                        <div class="group flex items-start space-x-4 p-5 rounded-2xl bg-surface-container-lowest border-2 border-dashed border-outline-variant/30 hover:border-secondary transition-colors">
+                            <div class="flex-shrink-0 w-12 h-12 rounded-xl bg-primary-fixed flex items-center justify-center text-on-primary-fixed-variant group-hover:rotate-3 transition-transform">
+                                <span class="material-symbols-outlined">fact_check</span>
+                            </div>
+                            <div>
+                                <h3 class="font-headline font-bold text-on-surface">Validated Data</h3>
+                                <p class="text-on-surface-variant text-sm mt-1">Built-in validation keeps every record accurate and complete.</p>
+                            </div>
+                        </div>
+
+                        <div class="group flex items-start space-x-4 p-5 rounded-2xl bg-surface-container-lowest border-2 border-dashed border-outline-variant/30 hover:border-secondary transition-colors translate-x-4">
+                            <div class="flex-shrink-0 w-12 h-12 rounded-xl bg-tertiary-fixed-dim flex items-center justify-center text-on-tertiary-fixed-variant group-hover:-rotate-3 transition-transform">
+                                <span class="material-symbols-outlined">bolt</span>
+                            </div>
+                            <div>
+                                <h3 class="font-headline font-bold text-on-surface">Instant Updates</h3>
+                                <p class="text-on-surface-variant text-sm mt-1">Add, edit, or remove records in seconds, with no page reloads.</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="input-field col s12 m6">
-                    <input id="first_name" type="text" ng-model="firstName" placeholder="First Name" />
-                    <span class="helper-text">Required.</span>
+
+                <div class="mt-12 relative w-full h-44 rounded-2xl overflow-hidden border-2 border-dashed border-secondary rotate-1 bg-gradient-to-br from-secondary-container/60 to-primary-fixed/50 flex items-center justify-center">
+                    <div class="washi-tape h-6 w-20 -top-2 -left-3 -rotate-12 rounded-sm"></div>
+                    <div class="text-center">
+                        <span class="material-symbols-outlined text-6xl text-primary">badge</span>
+                        <p class="text-primary font-bold text-sm mt-1 tracking-wide">Employee Management System</p>
+                    </div>
                 </div>
-                <div class="input-field col s12 m6">
-                    <input id="middle_name" type="text" ng-model="middleName" placeholder="Middle Name" />
-                    <span class="helper-text">Optional.</span>
+            </section>
+
+            <!-- Right: Registration Form -->
+            <section class="bg-surface-container-lowest p-8 md:p-12 lg:p-14 flex flex-col justify-center">
+                <div class="lg:hidden mb-8 text-center">
+                    <span class="text-3xl font-extrabold text-primary tracking-tighter">EMS Portal</span>
                 </div>
-                <div class="input-field col s12 m6">
-                    <input id="last_name" type="text" ng-model="lastName" placeholder="Last Name" />
-                    <span class="helper-text">Required.</span>
+
+                <div class="max-w-md mx-auto w-full">
+                    <header class="mb-8 text-center lg:text-left">
+                        <h2 class="text-3xl font-headline font-bold text-on-surface tracking-tight">Register an employee</h2>
+                        <p class="text-on-surface-variant mt-2 text-sm">Add a new employee record to the system.</p>
+                    </header>
+
+                    <form class="space-y-4" ng-submit="$event.preventDefault()">
+
+                        <!-- Names -->
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="space-y-1.5">
+                                <label class="block text-xs font-label font-bold text-on-surface-variant tracking-wider uppercase ml-1" for="first_name">First Name</label>
+                                <input class="browser-default w-full px-4 py-3 bg-surface-container-low border-0 focus:ring-2 focus:ring-primary focus:ring-inset rounded-xl transition-all placeholder:text-outline text-sm text-on-surface" id="first_name" type="text" ng-model="firstName" placeholder="Juan" required />
+                                <span class="block text-[10px] text-on-surface-variant/70 ml-1">Required.</span>
+                            </div>
+                            <div class="space-y-1.5">
+                                <label class="block text-xs font-label font-bold text-on-surface-variant tracking-wider uppercase ml-1" for="last_name">Last Name</label>
+                                <input class="browser-default w-full px-4 py-3 bg-surface-container-low border-0 focus:ring-2 focus:ring-primary focus:ring-inset rounded-xl transition-all placeholder:text-outline text-sm text-on-surface" id="last_name" type="text" ng-model="lastName" placeholder="Dela Cruz" required />
+                                <span class="block text-[10px] text-on-surface-variant/70 ml-1">Required.</span>
+                            </div>
+                        </div>
+
+                        <!-- Middle Name -->
+                        <div class="space-y-1.5">
+                            <label class="block text-xs font-label font-bold text-on-surface-variant tracking-wider uppercase ml-1" for="middle_name">Middle Name (Optional)</label>
+                            <input class="browser-default w-full px-4 py-3 bg-surface-container-low border-0 focus:ring-2 focus:ring-primary focus:ring-inset rounded-xl transition-all placeholder:text-outline text-sm text-on-surface" id="middle_name" type="text" ng-model="middleName" placeholder="Santos" />
+                            <span class="block text-[10px] text-on-surface-variant/70 ml-1">Optional.</span>
+                        </div>
+
+                        <!-- Employee ID & Username -->
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="space-y-1.5">
+                                <label class="block text-xs font-label font-bold text-on-surface-variant tracking-wider uppercase ml-1" for="emp_id">Employee ID</label>
+                                <input class="browser-default w-full px-4 py-3 bg-surface-container-low border-0 focus:ring-2 focus:ring-primary focus:ring-inset rounded-xl transition-all placeholder:text-outline text-sm text-on-surface" id="emp_id" type="text" ng-model="empID" placeholder="1001" required />
+                                <span class="block text-[10px] text-on-surface-variant/70 ml-1">Required. Numbers only, must be unique.</span>
+                            </div>
+                            <div class="space-y-1.5">
+                                <label class="block text-xs font-label font-bold text-on-surface-variant tracking-wider uppercase ml-1" for="username">Username</label>
+                                <input class="browser-default w-full px-4 py-3 bg-surface-container-low border-0 focus:ring-2 focus:ring-primary focus:ring-inset rounded-xl transition-all placeholder:text-outline text-sm text-on-surface" id="username" type="text" ng-model="username" placeholder="juan.dc" required />
+                                <span class="block text-[10px] text-on-surface-variant/70 ml-1">Required. Must be unique.</span>
+                            </div>
+                        </div>
+
+                        <!-- Email -->
+                        <div class="space-y-1.5">
+                            <label class="block text-xs font-label font-bold text-on-surface-variant tracking-wider uppercase ml-1" for="email">Email Address</label>
+                            <input class="browser-default w-full px-4 py-3 bg-surface-container-low border-0 focus:ring-2 focus:ring-primary focus:ring-inset rounded-xl transition-all placeholder:text-outline text-sm text-on-surface" id="email" type="email" ng-model="email" placeholder="juan.delacruz@ems.com" required />
+                            <span class="block text-[10px] text-on-surface-variant/70 ml-1">Required. Enter a valid email address.</span>
+                        </div>
+
+                        <!-- Passwords -->
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="space-y-1.5">
+                                <label class="block text-xs font-label font-bold text-on-surface-variant tracking-wider uppercase ml-1" for="password">Password</label>
+                                <input class="browser-default w-full px-4 py-3 bg-surface-container-low border-0 focus:ring-2 focus:ring-primary focus:ring-inset rounded-xl transition-all placeholder:text-outline text-sm text-on-surface" id="password" type="password" ng-model="password" placeholder="********" required />
+                                <span class="block text-[10px] text-on-surface-variant/70 ml-1">8+ characters, upper/lowercase, number, special.</span>
+                            </div>
+                            <div class="space-y-1.5">
+                                <label class="block text-xs font-label font-bold text-on-surface-variant tracking-wider uppercase ml-1" for="confirm_password">Confirm</label>
+                                <input class="browser-default w-full px-4 py-3 bg-surface-container-low border-0 focus:ring-2 focus:ring-primary focus:ring-inset rounded-xl transition-all placeholder:text-outline text-sm text-on-surface" id="confirm_password" type="password" ng-model="confirmPassword" placeholder="********" required />
+                                <span class="block text-[10px] text-on-surface-variant/70 ml-1">Must match the password.</span>
+                            </div>
+                        </div>
+
+                        <!-- Employment Details -->
+                        <div class="pt-4 pb-2">
+                            <div class="flex items-center space-x-2 mb-4">
+                                <div class="h-px flex-1 bg-outline-variant/30"></div>
+                                <span class="text-[10px] font-label font-bold text-outline uppercase tracking-[0.2em]">Employment Details</span>
+                                <div class="h-px flex-1 bg-outline-variant/30"></div>
+                            </div>
+
+                            <div class="space-y-4">
+                                <div class="grid grid-cols-2 gap-4">
+                                    <div class="space-y-1.5">
+                                        <label class="block text-xs font-label font-bold text-on-surface-variant tracking-wider uppercase ml-1" for="position">Position</label>
+                                        <input class="browser-default w-full px-4 py-3 bg-surface-container-low border-0 focus:ring-2 focus:ring-primary focus:ring-inset rounded-xl transition-all placeholder:text-outline text-sm text-on-surface" id="position" type="text" ng-model="position" placeholder="Developer" required />
+                                        <span class="block text-[10px] text-on-surface-variant/70 ml-1">Required.</span>
+                                    </div>
+                                    <div class="space-y-1.5">
+                                        <label class="block text-xs font-label font-bold text-on-surface-variant tracking-wider uppercase ml-1" for="department">Department</label>
+                                        <input class="browser-default w-full px-4 py-3 bg-surface-container-low border-0 focus:ring-2 focus:ring-primary focus:ring-inset rounded-xl transition-all placeholder:text-outline text-sm text-on-surface" id="department" type="text" ng-model="department" placeholder="IT" required />
+                                        <span class="block text-[10px] text-on-surface-variant/70 ml-1">Required.</span>
+                                    </div>
+                                </div>
+
+                                <div class="space-y-1.5">
+                                    <label class="block text-xs font-label font-bold text-on-surface-variant tracking-wider uppercase ml-1" for="contact_number">Contact Number</label>
+                                    <input class="browser-default w-full px-4 py-3 bg-surface-container-low border-0 focus:ring-2 focus:ring-primary focus:ring-inset rounded-xl transition-all placeholder:text-outline text-sm text-on-surface" id="contact_number" type="tel" ng-model="contactNumber" placeholder="09171234567" required />
+                                    <span class="block text-[10px] text-on-surface-variant/70 ml-1">Required. Exactly 11 digits.</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Actions -->
+                        <div class="pt-2 space-y-3">
+                            <button class="w-full py-4 px-6 bg-gradient-to-r from-primary to-primary-container text-on-primary font-headline font-bold rounded-full shadow-lg shadow-primary/20 hover:shadow-xl hover:opacity-90 transition-all active:scale-[0.98] flex items-center justify-center space-x-2" type="button" ng-click="registrationFunc()">
+                                <span>Register Employee</span>
+                                <span class="material-symbols-outlined text-xl">arrow_forward</span>
+                            </button>
+                            <button class="w-full py-3.5 px-6 bg-transparent text-primary font-headline font-bold rounded-full border-2 border-dashed border-primary/40 hover:bg-primary/5 transition-all active:scale-[0.98] flex items-center justify-center space-x-2" type="button" ng-click="clearRegistrationFunc()">
+                                <span class="material-symbols-outlined text-xl">restart_alt</span>
+                                <span>Clear Registration</span>
+                            </button>
+                        </div>
+                    </form>
+
+                    <footer class="mt-8 text-center">
+                        <p class="text-on-surface-variant text-sm">
+                            Already have an account?
+                            <a class="text-primary font-bold hover:text-secondary transition-colors underline decoration-secondary-container decoration-4 underline-offset-4 cursor-pointer" ng-click="redirectFunc('/Main/LoginPage')">Sign in here</a>
+                        </p>
+                    </footer>
                 </div>
-                <div class="input-field col s12 m6">
-                    <input id="username" type="text" ng-model="username" placeholder="Username" />
-                    <span class="helper-text">Required. must be unique.</span>
+            </section>
+        </div>
+
+        <!-- Records Table -->
+        <div class="mt-10 bg-surface-container-lowest rounded-3xl shadow-xl border-2 border-dashed border-outline-variant/30 p-6 md:p-8">
+            <div class="flex items-center justify-between mb-6">
+                <div>
+                    <h3 class="text-2xl font-headline font-extrabold text-primary tracking-tight">Registered Employees</h3>
+                    <p class="text-on-surface-variant text-sm mt-1">All employee records currently stored in the system.</p>
                 </div>
-                <div class="input-field col s12 m6">
-                    <input id="email" type="email" ng-model="email" placeholder="Email" />
-                    <span class="helper-text">Required. enter a valid email address.</span>
-                </div>
-                <div class="input-field col s12 m6">
-                    <input id="password" type="password" ng-model="password" placeholder="Password" />
-                    <span class="helper-text">Required. 8+ characters with upper/lowercase, a number, and a special character.</span>
-                </div>
-                <div class="input-field col s12 m6">
-                    <input id="confirm_password" type="password" ng-model="confirmPassword" placeholder="Confirm Password" />
-                    <span class="helper-text">Required. must match the password.</span>
-                </div>
-                <div class="input-field col s12 m6">
-                    <input id="contact_number" type="text" ng-model="contactNumber" placeholder="Contact Number" />
-                    <span class="helper-text">Required. exactly 11 digits.</span>
-                </div>
-                <div class="input-field col s12 m6">
-                    <input id="position" type="text" ng-model="position" placeholder="Position" />
-                    <span class="helper-text">Required.</span>
-                </div>
-                <div class="input-field col s12 m6">
-                    <input id="department" type="text" ng-model="department" placeholder="Department" />
-                    <span class="helper-text">Required.</span>
-                </div>
+                <span class="material-symbols-outlined text-primary text-3xl hidden sm:block">table_view</span>
             </div>
 
-            <div class="row">
-                <div class="col s12">
-                    <button class="btn blue darken-3" ng-click="registrationFunc()">Register</button>
-                    <button class="btn grey" ng-click="updateFunc()">Update</button>
-                </div>
+            <div class="overflow-x-auto">
+                <table class="w-full text-left text-sm">
+                    <thead class="border-b-2 border-dashed border-outline-variant/40">
+                        <tr class="text-[10px] uppercase tracking-[0.15em] text-on-surface-variant">
+                            <th class="py-3 px-4 font-bold">Employee ID</th>
+                            <th class="py-3 px-4 font-bold">First Name</th>
+                            <th class="py-3 px-4 font-bold">Last Name</th>
+                            <th class="py-3 px-4 font-bold">Username</th>
+                            <th class="py-3 px-4 font-bold">Email</th>
+                            <th class="py-3 px-4 font-bold">Position</th>
+                            <th class="py-3 px-4 font-bold">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-outline-variant/20">
+                        <tr class="hover:bg-surface-container-low transition-colors" ng-repeat="udata in userArray">
+                            <td class="py-3 px-4 text-on-surface">{{udata.EmpID}}</td>
+                            <td class="py-3 px-4 text-on-surface">{{udata.FName}}</td>
+                            <td class="py-3 px-4 text-on-surface">{{udata.LName}}</td>
+                            <td class="py-3 px-4 text-on-surface">{{udata.Username}}</td>
+                            <td class="py-3 px-4 text-on-surface">{{udata.Email}}</td>
+                            <td class="py-3 px-4 text-on-surface">{{udata.Position}}</td>
+                            <td class="py-3 px-4">
+                                <div class="flex flex-wrap gap-2">
+                                    <button class="px-3 py-1.5 rounded-full bg-surface-container-high text-primary text-xs font-bold hover:opacity-90 transition-opacity" ng-click="editFunc($index)">Edit</button>
+                                    <button class="px-3 py-1.5 rounded-full bg-secondary text-on-secondary text-xs font-bold hover:opacity-90 transition-opacity" ng-click="updateFunc($index)">Update</button>
+                                    <button class="px-3 py-1.5 rounded-full bg-error text-on-error text-xs font-bold hover:opacity-90 transition-opacity" ng-click="deleteFunc($index)">Delete</button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
-    </div>
 
-    <div class="card">
-        <div class="card-content">
-            <span class="card-title">Registered Employees</span>
-            <table class="striped highlight">
-                <thead>
-                    <tr>
-                        <th>Employee ID</th>
-                        <th>First Name</th>
-                        <th>Last Name</th>
-                        <th>Username</th>
-                        <th>Email</th>
-                        <th>Position</th>
-                        <th>Action</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr ng-repeat="udata in userArray">
-                        <td>{{udata.EmpID}}</td>
-                        <td>{{udata.FName}}</td>
-                        <td>{{udata.LName}}</td>
-                        <td>{{udata.Username}}</td>
-                        <td>{{udata.Email}}</td>
-                        <td>{{udata.Position}}</td>
-                        <td>
-                            <button class="btn-small blue darken-3" ng-click="editFunc($index)">Edit</button>
-                            <button class="btn-small red" ng-click="deleteFunc($index)">Delete</button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
     </div>
-
 </div>

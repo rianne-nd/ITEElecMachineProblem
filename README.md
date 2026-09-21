@@ -9,8 +9,8 @@ Demonstrates client-side CRUD (in-memory AngularJS array — no database), form 
 ## 1. Tech Stack & Setup
 - [x] **ASP.NET MVC & C# Integration** — ASP.NET MVC 5, .NET Framework 4.7.2
 - [x] **AngularJS Frontend Integration** — `angularjs` 1.8.2 installed; module in `Scripts/HolyScripts/Module.js` (`ITEElecMachineProblemModule`)
-- [x] **Non-Bootstrap CSS Framework** — Materialize CSS linked via CDN in `_MainLayout.cshtml`
-- [x] **Custom Styling** — Materialize is the primary framework (cards, grid, striped tables, helper text); deeper styling can be refined by the frontend teammate
+- [x] **Non-Bootstrap CSS Framework** — Materialize CSS (loaded) plus **Tailwind CSS** (utility classes) via CDN in `_MainLayout.cshtml`
+- [x] **Custom Styling** — Tailwind-driven "scrapbook" theme (warm cream palette, dashed borders, washi-tape accents, Plus Jakarta Sans) applied across all pages; Materialize provides the framework baseline
 - [x] **No Default Templates** — default `HomeController`, `Views/Home/*`, `Views/Shared/_Layout.cshtml`, and `Error.cshtml` removed
 
 > Note: the Bootstrap NuGet package and its files are still present but **unused** — acceptable as long as nothing references them.
@@ -18,8 +18,8 @@ Demonstrates client-side CRUD (in-memory AngularJS array — no database), form 
 ---
 
 ## 2. Layout & Controllers
-- [x] **Custom Master Layout (`_MainLayout.cshtml`)** — logo/branding (EMS Portal), nav bar linking all pages, header with Material icons, footer, JS dependencies at the bottom
-  - [x] Footer element (Materialize `page-footer blue darken-3` — EMS Portal branding + Quick Links, matches the nav theme)
+- [x] **Custom Master Layout (`_MainLayout.cshtml`)** — Tailwind-styled header (EMS Portal branding + nav linking all pages), footer, JS dependencies at the bottom
+  - [x] Footer element (themed footer with branding, quick links and copyright)
 - [x] **Custom C# Controller (`MainController.cs`)** — actions: `Index()`, `LoginPage()`, `RegistrationPage()`, `AboutPage()`, `ContactPage()`, and `GetWelcomeMessage()` (JSON)
 - [x] **Server Data Passing** — `GetWelcomeMessage()` returns "Welcome to the Employee Management System!" as JSON, consumed by AngularJS `$http`
 
@@ -108,8 +108,9 @@ Demonstrates client-side CRUD (in-memory AngularJS array — no database), form 
 
 ## Technologies Used
 - **Backend**: ASP.NET MVC 5, C#, .NET Framework 4.7.2
-- **Frontend**: AngularJS 1.x, Materialize CSS, SweetAlert2
-- **Icons**: Material Design Icons
+- **Frontend**: AngularJS 1.x, Tailwind CSS + Materialize CSS, SweetAlert2
+- **Typography**: Plus Jakarta Sans
+- **Icons**: Material Symbols / Material Design Icons
 - **HTTP Client**: AngularJS `$http` service
 
 ---
@@ -161,4 +162,5 @@ ITEElecMachineProblem/
 - Because data is in-memory, records reset on a full page reload/navigation — that is expected for this activity.
 - SweetAlert2 is used for all notifications (no vanilla `alert()`).
 - AngularJS handles all dynamic data binding and DOM manipulation.
+- Tailwind CSS and Materialize CSS are both loaded in `_MainLayout.cshtml`; Tailwind carries the custom theme, while Materialize remains the CSS-framework requirement.
 - Bootstrap files are present but unused (allowed — just don't reference them).

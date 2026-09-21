@@ -1,65 +1,143 @@
 <!DOCTYPE html>
-
-<html>
+<html class="light" lang="en">
 <head>
-    <meta name="viewport" content="width=device-width" />
-    <title>@ViewBag.Title</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>EMS Portal</title>
 
-    <!-- Materialize CSS CDN -->
+    <!-- CSS Framework: Materialize CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
 
-    <!-- Material Design Icons CDN -->
+    <!-- Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-icons/3.0.1/iconfont/material-icons.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 
-    <!-- SweetAlert2 CSS CDN -->
+    <!-- Typography -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap">
+
+    <!-- CSS Framework: Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms"></script>
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "background": "#fef8f4",
+                        "surface": "#fef8f4",
+                        "surface-bright": "#fef8f4",
+                        "surface-dim": "#dfd9d5",
+                        "surface-variant": "#e7e1dd",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container-low": "#f8f2ee",
+                        "surface-container": "#f3ede9",
+                        "surface-container-high": "#ede7e3",
+                        "surface-container-highest": "#e7e1dd",
+                        "on-surface": "#1d1b19",
+                        "on-surface-variant": "#41484b",
+                        "on-background": "#1d1b19",
+                        "outline": "#71787c",
+                        "outline-variant": "#c1c7cb",
+                        "primary": "#4d6076",
+                        "primary-container": "#66788f",
+                        "primary-fixed": "#d1e4ff",
+                        "primary-fixed-dim": "#b5c8e2",
+                        "on-primary": "#ffffff",
+                        "on-primary-fixed-variant": "#36485d",
+                        "secondary": "#3d6374",
+                        "secondary-container": "#bee6f9",
+                        "secondary-fixed": "#c1e8fc",
+                        "on-secondary": "#ffffff",
+                        "on-secondary-container": "#426878",
+                        "tertiary": "#50606b",
+                        "tertiary-container": "#697985",
+                        "tertiary-fixed": "#d4e5f2",
+                        "tertiary-fixed-dim": "#b8c9d6",
+                        "on-tertiary-fixed": "#0d1d27",
+                        "on-tertiary-fixed-variant": "#394953",
+                        "error": "#ba1a1a",
+                        "error-container": "#ffdad6",
+                        "on-error": "#ffffff",
+                        "on-error-container": "#93000a"
+                    },
+                    fontFamily: {
+                        headline: ["Plus Jakarta Sans"],
+                        body: ["Plus Jakarta Sans"],
+                        label: ["Plus Jakarta Sans"]
+                    },
+                    borderRadius: { DEFAULT: "0.25rem", lg: "0.5rem", xl: "0.75rem", full: "9999px" }
+                }
+            }
+        };
+    </script>
+
+    <style>
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .dot-grid { background-image: radial-gradient(#e7e1dd 1px, transparent 1px); background-size: 24px 24px; }
+        .washi-tape { background-color: #bee6f9; opacity: 0.55; position: absolute; z-index: 10; }
+        /* Neutralize Materialize's global element styles that clash with the Tailwind theme */
+        nav { background-color: transparent; height: auto; line-height: normal; box-shadow: none; }
+        /* Keep native checkboxes (Materialize otherwise hides the input and injects a custom box) */
+        input[type="checkbox"] { position: static !important; opacity: 1 !important; pointer-events: auto !important; }
+        input[type="checkbox"] + label { padding-left: 0 !important; }
+        input[type="checkbox"] + label::before,
+        input[type="checkbox"] + label::after { content: none !important; display: none !important; }
+    </style>
+
+    <!-- SweetAlert2 CSS (loaded last so dialog styles survive Tailwind's reset) -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
-
 </head>
-<body ng-app="ITEElecMachineProblemModule" ng-controller="ITEElecMachineProblemController">
+<body class="bg-background font-body text-on-surface min-h-screen" ng-app="ITEElecMachineProblemModule" ng-controller="ITEElecMachineProblemController">
 
-    <!-- Header -->
-    <header id="top">
-        <nav class="blue darken-3">
-            <div class="nav-wrapper">
-                <a href="#!" class="brand-logo"><i class="material-icons left">business</i>EMS Portal</a>
-                <ul id="nav-mobile" class="right hide-on-med-and-down">
-                    <li><a ng-click="redirectFunc('/Main/Index')"><i class="material-icons left">home</i>Home</a></li>
-                    <li><a ng-click="redirectFunc('/Main/RegistrationPage')"><i class="material-icons left">person_add</i>Registration</a></li>
-                    <li><a ng-click="redirectFunc('/Main/AboutPage')"><i class="material-icons left">info</i>About</a></li>
-                    <li><a ng-click="redirectFunc('/Main/ContactPage')"><i class="material-icons left">contacts</i>Contact</a></li>
-                    <li><a ng-click="redirectFunc('/Main/LoginPage')"><i class="material-icons left">lock</i>Logout</a></li>
-                </ul>
+    <!-- Header / Navigation -->
+    <header class="sticky top-0 z-40 bg-surface-container-lowest/90 backdrop-blur border-b-2 border-dashed border-outline-variant/30">
+        <div class="max-w-6xl mx-auto px-4 md:px-8 h-20 flex items-center justify-between">
+            <a class="flex items-center gap-2 cursor-pointer shrink-0" ng-click="redirectFunc('/Main/Index')">
+                <span class="material-symbols-outlined text-primary text-3xl">badge</span>
+                <span class="text-2xl font-extrabold text-primary tracking-tighter whitespace-nowrap">EMS Portal</span>
+            </a>
+
+            <div class="hidden md:flex items-center gap-1">
+                <a class="px-4 py-2 rounded-full text-sm font-semibold text-on-surface-variant hover:text-primary hover:bg-surface-container transition-colors cursor-pointer" ng-click="redirectFunc('/Main/Index')">Home</a>
+                <a class="px-4 py-2 rounded-full text-sm font-semibold text-on-surface-variant hover:text-primary hover:bg-surface-container transition-colors cursor-pointer" ng-click="redirectFunc('/Main/RegistrationPage')">Registration</a>
+                <a class="px-4 py-2 rounded-full text-sm font-semibold text-on-surface-variant hover:text-primary hover:bg-surface-container transition-colors cursor-pointer" ng-click="redirectFunc('/Main/AboutPage')">About</a>
+                <a class="px-4 py-2 rounded-full text-sm font-semibold text-on-surface-variant hover:text-primary hover:bg-surface-container transition-colors cursor-pointer" ng-click="redirectFunc('/Main/ContactPage')">Contact</a>
+                <a class="ml-2 px-5 py-2.5 rounded-full text-sm font-bold bg-primary text-on-primary hover:opacity-90 transition-opacity cursor-pointer" ng-click="redirectFunc('/Main/LoginPage')">Logout</a>
             </div>
-        </nav>
-    </header>
 
-    <div>
-        @RenderBody()
-    </div>
-
-
-
-    <!-- Footer -->
-    <footer class="page-footer blue darken-3">
-        <div class="container">
-            <div class="row">
-                <div class="col s12 m6">
-                    <h5 class="white-text"><i class="material-icons left">business</i>EMS Portal</h5>
-                    <p class="grey-text text-lighten-4">Employee Management System.</p>
-                </div>
-                <div class="col s12 m6">
-                    <h5 class="white-text">Quick Links</h5>
-                    <ul>
-                        <li><a class="grey-text text-lighten-3" ng-click="redirectFunc('/Main/Index')">Home</a></li>
-                        <li><a class="grey-text text-lighten-3" ng-click="redirectFunc('/Main/RegistrationPage')">Registration</a></li>
-                        <li><a class="grey-text text-lighten-3" ng-click="redirectFunc('/Main/AboutPage')">About</a></li>
-                        <li><a class="grey-text text-lighten-3" ng-click="redirectFunc('/Main/ContactPage')">Contact</a></li>
-                    </ul>
-                </div>
+            <div class="flex md:hidden items-center gap-3 text-sm font-semibold text-primary">
+                <a class="cursor-pointer" ng-click="redirectFunc('/Main/Index')">Home</a>
+                <a class="cursor-pointer" ng-click="redirectFunc('/Main/RegistrationPage')">Register</a>
+                <a class="cursor-pointer" ng-click="redirectFunc('/Main/LoginPage')">Logout</a>
             </div>
         </div>
-    </footer>
+    </header>
 
+    <main class="min-h-[70vh]">
+        @RenderBody()
+    </main>
+
+    <!-- Footer -->
+    <footer class="mt-16 border-t-2 border-dashed border-outline-variant/30 bg-surface-container-low">
+        <div class="max-w-6xl mx-auto px-4 md:px-8 py-10 flex flex-col md:flex-row items-center justify-between gap-6">
+            <div class="text-center md:text-left">
+                <div class="flex items-center justify-center md:justify-start gap-2">
+                    <span class="material-symbols-outlined text-primary">badge</span>
+                    <span class="text-xl font-extrabold text-primary tracking-tighter">EMS Portal</span>
+                </div>
+                <p class="text-on-surface-variant text-sm mt-1">Employee Management System.</p>
+            </div>
+            <div class="flex flex-wrap justify-center gap-6">
+                <a class="text-[10px] font-bold text-on-surface-variant/50 hover:text-primary transition-colors tracking-[0.2em] uppercase cursor-pointer" ng-click="redirectFunc('/Main/Index')">Home</a>
+                <a class="text-[10px] font-bold text-on-surface-variant/50 hover:text-primary transition-colors tracking-[0.2em] uppercase cursor-pointer" ng-click="redirectFunc('/Main/RegistrationPage')">Registration</a>
+                <a class="text-[10px] font-bold text-on-surface-variant/50 hover:text-primary transition-colors tracking-[0.2em] uppercase cursor-pointer" ng-click="redirectFunc('/Main/AboutPage')">About</a>
+                <a class="text-[10px] font-bold text-on-surface-variant/50 hover:text-primary transition-colors tracking-[0.2em] uppercase cursor-pointer" ng-click="redirectFunc('/Main/ContactPage')">Contact</a>
+            </div>
+        </div>
+        <div class="border-t border-outline-variant/20 py-4">
+            <p class="text-center text-[10px] font-bold text-on-surface-variant/40 tracking-[0.2em] uppercase">&copy; @DateTime.Now.Year EMS Portal &mdash; Employee Management System</p>
+        </div>
+    </footer>
 
     <!-- JavaScript Dependencies -->
     <script src="~/Scripts/jquery-3.7.0.min.js"></script>
@@ -71,7 +149,6 @@
     <script src="~/Scripts/HolyScripts/Module.js"></script>
     <script src="~/Scripts/HolyScripts/Service.js"></script>
     <script src="~/Scripts/HolyScripts/Controller.js"></script>
-
 
 </body>
 </html>
