@@ -70,7 +70,7 @@
 
                 <div class="max-w-md mx-auto w-full">
                     <header class="mb-8 text-center lg:text-left">
-                        <h2 class="text-3xl font-headline font-bold text-on-surface tracking-tight">Register an employee</h2>
+                        <h2 class="text-3xl font-headline font-bold text-on-surface tracking-tight">{{ editingIndex == -1 ? 'Register an employee' : 'Editing an employee' }}</h2>
                         <p class="text-on-surface-variant mt-2 text-sm">Add a new employee record to the system.</p>
                     </header>
 
@@ -79,54 +79,56 @@
                         <!-- Names -->
                         <div class="grid grid-cols-2 gap-4">
                             <div class="space-y-1.5">
-                                <label class="block text-xs font-label font-bold text-on-surface-variant tracking-wider uppercase ml-1" for="first_name">First Name</label>
-                                <input class="browser-default w-full px-4 py-3 bg-surface-container-low border-0 focus:ring-2 focus:ring-primary focus:ring-inset rounded-xl transition-all placeholder:text-outline text-sm text-on-surface" id="first_name" type="text" ng-model="firstName" placeholder="Juan" required />
-                                <span class="block text-[10px] text-on-surface-variant/70 ml-1">Required.</span>
+                                <label class="block text-xs font-label font-bold text-on-surface-variant tracking-wider uppercase ml-1" for="first_name">First Name <span class="text-error">*</span></label>
+                                <input class="browser-default w-full px-4 py-3 bg-surface-container-low border-0 focus:ring-2 focus:ring-primary focus:ring-inset rounded-xl transition-all placeholder:text-outline text-sm text-on-surface" id="first_name" type="text" ng-model="firstName" placeholder="Juan" maxlength="50" required />
                             </div>
                             <div class="space-y-1.5">
-                                <label class="block text-xs font-label font-bold text-on-surface-variant tracking-wider uppercase ml-1" for="last_name">Last Name</label>
-                                <input class="browser-default w-full px-4 py-3 bg-surface-container-low border-0 focus:ring-2 focus:ring-primary focus:ring-inset rounded-xl transition-all placeholder:text-outline text-sm text-on-surface" id="last_name" type="text" ng-model="lastName" placeholder="Dela Cruz" required />
-                                <span class="block text-[10px] text-on-surface-variant/70 ml-1">Required.</span>
+                                <label class="block text-xs font-label font-bold text-on-surface-variant tracking-wider uppercase ml-1" for="last_name">Last Name <span class="text-error">*</span></label>
+                                <input class="browser-default w-full px-4 py-3 bg-surface-container-low border-0 focus:ring-2 focus:ring-primary focus:ring-inset rounded-xl transition-all placeholder:text-outline text-sm text-on-surface" id="last_name" type="text" ng-model="lastName" placeholder="Dela Cruz" maxlength="50" required />
                             </div>
                         </div>
 
-                        <!-- Middle Name -->
-                        <div class="space-y-1.5">
-                            <label class="block text-xs font-label font-bold text-on-surface-variant tracking-wider uppercase ml-1" for="middle_name">Middle Name (Optional)</label>
-                            <input class="browser-default w-full px-4 py-3 bg-surface-container-low border-0 focus:ring-2 focus:ring-primary focus:ring-inset rounded-xl transition-all placeholder:text-outline text-sm text-on-surface" id="middle_name" type="text" ng-model="middleName" placeholder="Santos" />
-                            <span class="block text-[10px] text-on-surface-variant/70 ml-1">Optional.</span>
+                        <!-- Middle Name & Suffix (both optional) -->
+                        <div class="grid grid-cols-2 gap-4">
+                            <div class="space-y-1.5">
+                                <label class="block text-xs font-label font-bold text-on-surface-variant tracking-wider uppercase ml-1" for="middle_name">Middle Name <span class="text-on-surface-variant/50">(Optional)</span></label>
+                                <input class="browser-default w-full px-4 py-3 bg-surface-container-low border-0 focus:ring-2 focus:ring-primary focus:ring-inset rounded-xl transition-all placeholder:text-outline text-sm text-on-surface" id="middle_name" type="text" ng-model="middleName" placeholder="Santos" maxlength="50" />
+                            </div>
+                            <div class="space-y-1.5">
+                                <label class="block text-xs font-label font-bold text-on-surface-variant tracking-wider uppercase ml-1" for="suffix">Suffix <span class="text-on-surface-variant/50">(Optional)</span></label>
+                                <input class="browser-default w-full px-4 py-3 bg-surface-container-low border-0 focus:ring-2 focus:ring-primary focus:ring-inset rounded-xl transition-all placeholder:text-outline text-sm text-on-surface" id="suffix" type="text" ng-model="suffix" placeholder="Jr., III" maxlength="10" />
+                            </div>
                         </div>
 
-                        <!-- Employee ID & Username -->
+                        <!-- Employee ID & Birthday -->
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div class="space-y-1.5">
-                                <label class="block text-xs font-label font-bold text-on-surface-variant tracking-wider uppercase ml-1" for="emp_id">Employee ID</label>
-                                <input class="browser-default w-full px-4 py-3 bg-surface-container-low border-0 focus:ring-2 focus:ring-primary focus:ring-inset rounded-xl transition-all placeholder:text-outline text-sm text-on-surface" id="emp_id" type="text" ng-model="empID" placeholder="1001" required />
-                                <span class="block text-[10px] text-on-surface-variant/70 ml-1">Required. Numbers only, must be unique.</span>
+                                <label class="block text-xs font-label font-bold text-on-surface-variant tracking-wider uppercase ml-1" for="emp_id">Employee ID <span class="text-error">*</span></label>
+                                <input class="browser-default w-full px-4 py-3 bg-surface-container-low border-0 focus:ring-2 focus:ring-primary focus:ring-inset rounded-xl transition-all placeholder:text-outline text-sm text-on-surface" id="emp_id" type="text" ng-model="empID" placeholder="1001" maxlength="10" required />
+                                <span class="block text-[10px] text-on-surface-variant/70 ml-1">Numbers only, must be unique.</span>
                             </div>
                             <div class="space-y-1.5">
-                                <label class="block text-xs font-label font-bold text-on-surface-variant tracking-wider uppercase ml-1" for="username">Username</label>
-                                <input class="browser-default w-full px-4 py-3 bg-surface-container-low border-0 focus:ring-2 focus:ring-primary focus:ring-inset rounded-xl transition-all placeholder:text-outline text-sm text-on-surface" id="username" type="text" ng-model="username" placeholder="juan.dc" required />
-                                <span class="block text-[10px] text-on-surface-variant/70 ml-1">Required. Must be unique.</span>
+                                <label class="block text-xs font-label font-bold text-on-surface-variant tracking-wider uppercase ml-1" for="birthday">Birthday <span class="text-error">*</span></label>
+                                <input class="browser-default w-full px-4 py-3 bg-surface-container-low border-0 focus:ring-2 focus:ring-primary focus:ring-inset rounded-xl transition-all text-sm text-on-surface" id="birthday" type="date" ng-model="birthday" ng-model-options="{ allowInvalid: true }" max="{{today}}" required />
                             </div>
                         </div>
 
                         <!-- Email -->
                         <div class="space-y-1.5">
-                            <label class="block text-xs font-label font-bold text-on-surface-variant tracking-wider uppercase ml-1" for="email">Email Address</label>
-                            <input class="browser-default w-full px-4 py-3 bg-surface-container-low border-0 focus:ring-2 focus:ring-primary focus:ring-inset rounded-xl transition-all placeholder:text-outline text-sm text-on-surface" id="email" type="email" ng-model="email" placeholder="juan.delacruz@ems.com" required />
-                            <span class="block text-[10px] text-on-surface-variant/70 ml-1">Required. Enter a valid email address.</span>
+                            <label class="block text-xs font-label font-bold text-on-surface-variant tracking-wider uppercase ml-1" for="email">Email Address <span class="text-error">*</span></label>
+                            <input class="browser-default w-full px-4 py-3 bg-surface-container-low border-0 focus:ring-2 focus:ring-primary focus:ring-inset rounded-xl transition-all placeholder:text-outline text-sm text-on-surface" id="email" type="email" ng-model="email" placeholder="juan.delacruz@ems.com" maxlength="254" required />
+                            <span class="block text-[10px] text-on-surface-variant/70 ml-1">Enter a valid email address. Must be unique.</span>
                         </div>
 
                         <!-- Passwords -->
                         <div class="grid grid-cols-2 gap-4">
                             <div class="space-y-1.5">
-                                <label class="block text-xs font-label font-bold text-on-surface-variant tracking-wider uppercase ml-1" for="password">Password</label>
-                                <input class="browser-default w-full px-4 py-3 bg-surface-container-low border-0 focus:ring-2 focus:ring-primary focus:ring-inset rounded-xl transition-all placeholder:text-outline text-sm text-on-surface" id="password" type="password" ng-model="password" placeholder="********" required />
+                                <label class="block text-xs font-label font-bold text-on-surface-variant tracking-wider uppercase ml-1" for="password">Password <span class="text-error">*</span></label>
+                                <input class="browser-default w-full px-4 py-3 bg-surface-container-low border-0 focus:ring-2 focus:ring-primary focus:ring-inset rounded-xl transition-all placeholder:text-outline text-sm text-on-surface" id="password" type="password" ng-model="password" placeholder="********" maxlength="254" required />
                                 <span class="block text-[10px] text-on-surface-variant/70 ml-1">8+ characters, upper/lowercase, number, special.</span>
                             </div>
                             <div class="space-y-1.5">
-                                <label class="block text-xs font-label font-bold text-on-surface-variant tracking-wider uppercase ml-1" for="confirm_password">Confirm</label>
+                                <label class="block text-xs font-label font-bold text-on-surface-variant tracking-wider uppercase ml-1" for="confirm_password">Confirm Password <span class="text-error">*</span></label>
                                 <input class="browser-default w-full px-4 py-3 bg-surface-container-low border-0 focus:ring-2 focus:ring-primary focus:ring-inset rounded-xl transition-all placeholder:text-outline text-sm text-on-surface" id="confirm_password" type="password" ng-model="confirmPassword" placeholder="********" required />
                                 <span class="block text-[10px] text-on-surface-variant/70 ml-1">Must match the password.</span>
                             </div>
@@ -143,28 +145,26 @@
                             <div class="space-y-4">
                                 <div class="grid grid-cols-2 gap-4">
                                     <div class="space-y-1.5">
-                                        <label class="block text-xs font-label font-bold text-on-surface-variant tracking-wider uppercase ml-1" for="position">Position</label>
-                                        <input class="browser-default w-full px-4 py-3 bg-surface-container-low border-0 focus:ring-2 focus:ring-primary focus:ring-inset rounded-xl transition-all placeholder:text-outline text-sm text-on-surface" id="position" type="text" ng-model="position" placeholder="Developer" required />
-                                        <span class="block text-[10px] text-on-surface-variant/70 ml-1">Required.</span>
+                                        <label class="block text-xs font-label font-bold text-on-surface-variant tracking-wider uppercase ml-1" for="position">Position <span class="text-error">*</span></label>
+                                        <input class="browser-default w-full px-4 py-3 bg-surface-container-low border-0 focus:ring-2 focus:ring-primary focus:ring-inset rounded-xl transition-all placeholder:text-outline text-sm text-on-surface" id="position" type="text" ng-model="position" placeholder="Developer" maxlength="50" required />
                                     </div>
                                     <div class="space-y-1.5">
-                                        <label class="block text-xs font-label font-bold text-on-surface-variant tracking-wider uppercase ml-1" for="department">Department</label>
-                                        <input class="browser-default w-full px-4 py-3 bg-surface-container-low border-0 focus:ring-2 focus:ring-primary focus:ring-inset rounded-xl transition-all placeholder:text-outline text-sm text-on-surface" id="department" type="text" ng-model="department" placeholder="IT" required />
-                                        <span class="block text-[10px] text-on-surface-variant/70 ml-1">Required.</span>
+                                        <label class="block text-xs font-label font-bold text-on-surface-variant tracking-wider uppercase ml-1" for="department">Department <span class="text-error">*</span></label>
+                                        <input class="browser-default w-full px-4 py-3 bg-surface-container-low border-0 focus:ring-2 focus:ring-primary focus:ring-inset rounded-xl transition-all placeholder:text-outline text-sm text-on-surface" id="department" type="text" ng-model="department" placeholder="IT" maxlength="50" required />
                                     </div>
                                 </div>
 
                                 <div class="space-y-1.5">
-                                    <label class="block text-xs font-label font-bold text-on-surface-variant tracking-wider uppercase ml-1" for="contact_number">Contact Number</label>
+                                    <label class="block text-xs font-label font-bold text-on-surface-variant tracking-wider uppercase ml-1" for="contact_number">Contact Number <span class="text-error">*</span></label>
                                     <input class="browser-default w-full px-4 py-3 bg-surface-container-low border-0 focus:ring-2 focus:ring-primary focus:ring-inset rounded-xl transition-all placeholder:text-outline text-sm text-on-surface" id="contact_number" type="tel" ng-model="contactNumber" placeholder="09171234567" required />
-                                    <span class="block text-[10px] text-on-surface-variant/70 ml-1">Required. Exactly 11 digits.</span>
+                                    <span class="block text-[10px] text-on-surface-variant/70 ml-1">Must start with 09, exactly 11 digits.</span>
                                 </div>
                             </div>
                         </div>
 
                         <!-- Actions -->
                         <div class="pt-2 space-y-3">
-                            <button class="w-full py-4 px-6 bg-gradient-to-r from-primary to-primary-container text-on-primary font-headline font-bold rounded-full shadow-lg shadow-primary/20 hover:shadow-xl hover:opacity-90 transition-all active:scale-[0.98] flex items-center justify-center space-x-2" type="button" ng-click="registrationFunc()">
+                            <button class="w-full py-4 px-6 bg-primary bg-gradient-to-r from-primary to-primary-container text-on-primary font-headline font-bold rounded-full shadow-lg shadow-primary/20 hover:shadow-xl hover:opacity-90 transition-all active:scale-[0.98] flex items-center justify-center space-x-2" type="button" ng-click="registrationFunc()">
                                 <span>Register Employee</span>
                                 <span class="material-symbols-outlined text-xl">arrow_forward</span>
                             </button>
@@ -201,10 +201,14 @@
                         <tr class="text-[10px] uppercase tracking-[0.15em] text-on-surface-variant">
                             <th class="py-3 px-4 font-bold">Employee ID</th>
                             <th class="py-3 px-4 font-bold">First Name</th>
+                            <th class="py-3 px-4 font-bold">Middle Name</th>
                             <th class="py-3 px-4 font-bold">Last Name</th>
-                            <th class="py-3 px-4 font-bold">Username</th>
+                            <th class="py-3 px-4 font-bold">Suffix</th>
+                            <th class="py-3 px-4 font-bold">Birthday</th>
                             <th class="py-3 px-4 font-bold">Email</th>
+                            <th class="py-3 px-4 font-bold">Contact Number</th>
                             <th class="py-3 px-4 font-bold">Position</th>
+                            <th class="py-3 px-4 font-bold">Department</th>
                             <th class="py-3 px-4 font-bold">Action</th>
                         </tr>
                     </thead>
@@ -212,10 +216,14 @@
                         <tr class="hover:bg-surface-container-low transition-colors" ng-repeat="udata in userArray">
                             <td class="py-3 px-4 text-on-surface">{{udata.EmpID}}</td>
                             <td class="py-3 px-4 text-on-surface">{{udata.FName}}</td>
+                            <td class="py-3 px-4 text-on-surface">{{udata.MName}}</td>
                             <td class="py-3 px-4 text-on-surface">{{udata.LName}}</td>
-                            <td class="py-3 px-4 text-on-surface">{{udata.Username}}</td>
+                            <td class="py-3 px-4 text-on-surface">{{udata.Suffix}}</td>
+                            <td class="py-3 px-4 text-on-surface">{{udata.Birthday | date:'yyyy-MM-dd'}}</td>
                             <td class="py-3 px-4 text-on-surface">{{udata.Email}}</td>
+                            <td class="py-3 px-4 text-on-surface">{{udata.ContactNumber}}</td>
                             <td class="py-3 px-4 text-on-surface">{{udata.Position}}</td>
+                            <td class="py-3 px-4 text-on-surface">{{udata.Department}}</td>
                             <td class="py-3 px-4">
                                 <div class="flex flex-wrap gap-2">
                                     <button class="px-3 py-1.5 rounded-full bg-surface-container-high text-primary text-xs font-bold hover:opacity-90 transition-opacity" ng-click="editFunc($index)">Edit</button>

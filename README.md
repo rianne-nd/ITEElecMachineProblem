@@ -29,16 +29,16 @@ Demonstrates client-side CRUD (in-memory AngularJS array — no database), form 
 
 ### Login View (`LoginPage.cshtml`)
 - [x] Card layout (centered)
-- [x] Username input field
+- [x] Username input field (`ng-model="loginUsername"`)
 - [x] Password input field (bound with `ng-model="loginPassword"`)
-- [x] Login button (redirects to `/Main/Index`)
+- [x] Login button (calls `loginFunc()` — redirects to `/Main/Index`)
 - [x] Clear button (wired to `clearLoginFunc()` — clears username + password)
 - [x] Link/button to Registration page ("Register here")
 
 ### Registration View (`RegistrationPage.cshtml`)
-- [x] Registration form in a card (11 fields, `ng-model` bound)
+- [x] Registration form in a card (12 fields, `ng-model` bound)
 - [x] Helper text under each field describing its requirements
-- [x] Live dynamic data table in a card (`ng-repeat`) with per-row Edit/Delete + top Register/Update buttons
+- [x] Live dynamic data table in a card (`ng-repeat`) with per-row Edit/Update/Delete buttons
 
 ### Home View (`Index.cshtml`)
 - [x] Card-style Home dashboard with welcome heading and quick action buttons
@@ -60,18 +60,20 @@ Demonstrates client-side CRUD (in-memory AngularJS array — no database), form 
 - [x] CREATE — `registrationFunc()` pushes a validated record to `userArray`
 - [x] READ — the table renders `userArray` via `ng-repeat`
 - [x] UPDATE — `editFunc()` loads a row into the form, `updateFunc()` saves it back
-- [x] DELETE — `deleteFunc()` removes a row after a confirm Swal
+- [x] DELETE — `deleteFunc()` removes a row after a confirm Swal (`$scope.$apply` so the table refreshes)
 
 ---
 
 ## 5. Client-Side Form Validation (AngularJS)
 - [x] Required fields
 - [x] Email format
-- [x] Contact number (exactly 11 digits)
-- [x] Numeric Employee ID
+- [x] Contact number (starts with `09`, exactly 11 digits)
+- [x] Numeric Employee ID (max 10 digits)
 - [x] Password strength
 - [x] Password matching
-- [x] Uniqueness rules (EmpID / Username / Email)
+- [x] Birthday (required, no future dates)
+- [x] Maximum-length limits (names, suffix, email, password, position, department)
+- [x] Uniqueness rules (Employee ID / Email)
 - [x] User feedback (SweetAlert2)
 
 ---
@@ -92,7 +94,7 @@ Demonstrates client-side CRUD (in-memory AngularJS array — no database), form 
 - ✅ 2/2 Contact View
 - ✅ 2/2 Registration View
 - ✅ 5/5 CRUD
-- ✅ 7/7 Validation
+- ✅ 10/10 Validation
 - ✅ 3/3 System Flow & Navigation
 
 ---
@@ -100,7 +102,8 @@ Demonstrates client-side CRUD (in-memory AngularJS array — no database), form 
 ## Optional Polish (not required by the brief)
 - Show the controller's welcome message on the Home page body (currently a SweetAlert popup)
 - Add 1–2 sample records to `userArray` so the table is populated on load
-- Add length validation (min/max) for name/username fields
+- Min-length validation (max-length is implemented; min-length was intentionally omitted)
+- Display Birthday / Suffix columns in the records table
 - (Frontend teammate) final styling pass
 - Replace the placeholder Contact details (email/phone/address) with real ones
 
@@ -160,6 +163,8 @@ ITEElecMachineProblem/
 ## Notes
 - Uses in-memory storage via an AngularJS array (no database); all data operations are client-side only.
 - Because data is in-memory, records reset on a full page reload/navigation — that is expected for this activity.
+- Employee records are identified by **Employee ID** and **Email** — the registration form has no Username field.
+  The **Login** page has its own Username + Password fields, as the brief requires.
 - SweetAlert2 is used for all notifications (no vanilla `alert()`).
 - AngularJS handles all dynamic data binding and DOM manipulation.
 - Tailwind CSS and Materialize CSS are both loaded in `_MainLayout.cshtml`; Tailwind carries the custom theme, while Materialize remains the CSS-framework requirement.

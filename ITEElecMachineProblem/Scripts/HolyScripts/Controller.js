@@ -2,6 +2,14 @@ app.controller('ITEElecMachineProblemController', function ($scope, ITEElecMachi
 
     $scope.userArray = [];
 
+    // -1 is registering
+    $scope.editingIndex = -1;
+
+    var now = new Date();
+    var mm = ('0' + (now.getMonth() + 1)).slice(-2);
+    var dd = ('0' + now.getDate()).slice(-2);
+    $scope.today = now.getFullYear() + '-' + mm + '-' + dd;
+
     $scope.redirectFunc = function (targetURL) {
         window.location.href = targetURL;
     };
@@ -30,16 +38,22 @@ app.controller('ITEElecMachineProblemController', function ($scope, ITEElecMachi
 
     $scope.clearRegistrationFunc = function () {
         $scope.empID = '';
+
         $scope.firstName = '';
         $scope.middleName = '';
+        $scope.suffix = '';
         $scope.lastName = '';
-        $scope.username = '';
+        $scope.birthday = '';
         $scope.email = '';
+
         $scope.password = '';
         $scope.confirmPassword = '';
+
         $scope.contactNumber = '';
         $scope.position = '';
         $scope.department = '';
+
+        $scope.editingIndex = -1;
     };
 
     // userindex = the row being edited, or -1 when registering a new record
@@ -57,14 +71,6 @@ app.controller('ITEElecMachineProblemController', function ($scope, ITEElecMachi
             Swal.fire({
                 title: 'Notification!',
                 text: 'Last name is required.',
-                icon: 'error'
-            });
-            return false;
-        }
-        if ($scope.username == undefined || $scope.username == '') {
-            Swal.fire({
-                title: 'Notification!',
-                text: 'Username is required.',
                 icon: 'error'
             });
             return false;
@@ -101,10 +107,10 @@ app.controller('ITEElecMachineProblemController', function ($scope, ITEElecMachi
             });
             return false;
         }
-        if (!/^\d{11}$/.test($scope.contactNumber)) {
+        if (!/^09\d{9}$/.test($scope.contactNumber)) {
             Swal.fire({
                 title: 'Notification!',
-                text: 'Contact number must be exactly 11 digits.',
+                text: 'Contact number must start with 09 and be exactly 11 digits.',
                 icon: 'error'
             });
             return false;
@@ -125,8 +131,24 @@ app.controller('ITEElecMachineProblemController', function ($scope, ITEElecMachi
             });
             return false;
         }
+        if ($scope.birthday == undefined || $scope.birthday == '') {
+            Swal.fire({
+                title: 'Notification!',
+                text: 'Birthday is required.',
+                icon: 'error'
+            });
+            return false;
+        }
+        if (new Date($scope.birthday) > new Date($scope.today)) {
+            Swal.fire({
+                title: 'Notification!',
+                text: 'Birthday cannot be a future date.',
+                icon: 'error'
+            });
+            return false;
+        }
 
-        // Uniqueness (skip the row being updated)
+        // unique check
         for (var i = 0; i < $scope.userArray.length; i++) {
 
             if (i == userindex) {
@@ -136,14 +158,6 @@ app.controller('ITEElecMachineProblemController', function ($scope, ITEElecMachi
                 Swal.fire({
                     title: 'Notification!',
                     text: 'Employee ID already exists.',
-                    icon: 'error'
-                });
-                return false;
-            }
-            if ($scope.userArray[i].Username == $scope.username) {
-                Swal.fire({
-                    title: 'Notification!',
-                    text: 'Username already exists.',
                     icon: 'error'
                 });
                 return false;
@@ -168,13 +182,18 @@ app.controller('ITEElecMachineProblemController', function ($scope, ITEElecMachi
         }
 
         var userData = {
+
             EmpID: $scope.empID,
+
             FName: $scope.firstName,
             MName: $scope.middleName,
+            Suffix: $scope.suffix,
             LName: $scope.lastName,
-            Username: $scope.username,
+            Birthday: $scope.birthday,
             Email: $scope.email,
+
             Password: $scope.password,
+
             ContactNumber: $scope.contactNumber,
             Position: $scope.position,
             Department: $scope.department
@@ -190,24 +209,29 @@ app.controller('ITEElecMachineProblemController', function ($scope, ITEElecMachi
         $scope.clearRegistrationFunc();
     }
 
-    // Loads the clicked row into the form
     $scope.editFunc = function (index) {
         var row = $scope.userArray[index];
 
         $scope.empID = row.EmpID;
+
         $scope.firstName = row.FName;
         $scope.middleName = row.MName;
+        $scope.suffix = row.Suffix;
         $scope.lastName = row.LName;
-        $scope.username = row.Username;
+        $scope.birthday = row.Birthday;
         $scope.email = row.Email;
+
         $scope.password = row.Password;
         $scope.confirmPassword = row.Password;
+
         $scope.contactNumber = row.ContactNumber;
+
         $scope.position = row.Position;
         $scope.department = row.Department;
+
+        $scope.editingIndex = index;
     };
 
-    // Saves the form into the row that called it
     $scope.updateFunc = function (userindex) {
 
         if ($scope.validateForm(userindex) == false) {
@@ -218,8 +242,9 @@ app.controller('ITEElecMachineProblemController', function ($scope, ITEElecMachi
         row.EmpID = $scope.empID;
         row.FName = $scope.firstName;
         row.MName = $scope.middleName;
+        row.Suffix = $scope.suffix;
         row.LName = $scope.lastName;
-        row.Username = $scope.username;
+        row.Birthday = $scope.birthday;
         row.Email = $scope.email;
         row.Password = $scope.password;
         row.ContactNumber = $scope.contactNumber;
@@ -246,7 +271,9 @@ app.controller('ITEElecMachineProblemController', function ($scope, ITEElecMachi
         }).then(function (result) {
             if (result.isConfirmed) {
 
-                $scope.userArray.splice(userindex, 1);
+                $scope.$apply(function () {
+                    $scope.userArray.splice(userindex, 1);
+                });
 
                 Swal.fire({
                     title: 'Deleted!',
