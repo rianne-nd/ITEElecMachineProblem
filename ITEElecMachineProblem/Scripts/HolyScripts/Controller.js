@@ -36,6 +36,25 @@ app.controller('ITEElecMachineProblemController', function ($scope, ITEElecMachi
         $scope.loginPassword = '';
     }
 
+    $scope.patterns = {
+        empID: /^\d+$/,
+        email: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+        password: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/,
+        contactNumber: /^09\d{9}$/
+    };
+
+    $scope.onEmpIDInput = function () {
+        if ($scope.empID) {
+            $scope.empID = $scope.empID.replace(/\D/g, '');
+        }
+    };
+
+    $scope.onContactNumberInput = function () {
+        if ($scope.contactNumber) {
+            $scope.contactNumber = $scope.contactNumber.replace(/\D/g, '');
+        }
+    };
+
     $scope.clearRegistrationFunc = function () {
         $scope.empID = '';
 
@@ -54,6 +73,11 @@ app.controller('ITEElecMachineProblemController', function ($scope, ITEElecMachi
         $scope.department = '';
 
         $scope.editingIndex = -1;
+
+        if ($scope.regForm) {
+            $scope.regForm.$setPristine();
+            $scope.regForm.$setUntouched();
+        }
     };
 
     // userindex = the row being edited, or -1 when registering a new record
@@ -175,7 +199,18 @@ app.controller('ITEElecMachineProblemController', function ($scope, ITEElecMachi
         return true;
     };
 
+    $scope.touchAllFields = function () {
+        if ($scope.regForm) {
+            angular.forEach($scope.regForm, function (control) {
+                if (control && control.$setTouched) {
+                    control.$setTouched();
+                }
+            });
+        }
+    };
+
     $scope.registrationFunc = function () {
+        $scope.touchAllFields();
 
         if ($scope.validateForm(-1) == false) {
             return;
@@ -230,9 +265,15 @@ app.controller('ITEElecMachineProblemController', function ($scope, ITEElecMachi
         $scope.department = row.Department;
 
         $scope.editingIndex = index;
+
+        if ($scope.regForm) {
+            $scope.regForm.$setPristine();
+            $scope.regForm.$setUntouched();
+        }
     };
 
     $scope.updateFunc = function (userindex) {
+        $scope.touchAllFields();
 
         if ($scope.validateForm(userindex) == false) {
             return;

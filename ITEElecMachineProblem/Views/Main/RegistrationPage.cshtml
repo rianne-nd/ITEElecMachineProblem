@@ -74,17 +74,19 @@
                         <p class="text-on-surface-variant mt-2 text-sm">Add a new employee record to the system.</p>
                     </header>
 
-                    <form class="space-y-4" ng-submit="$event.preventDefault()">
+                    <form name="regForm" class="space-y-4" novalidate ng-submit="$event.preventDefault()">
 
                         <!-- Names -->
                         <div class="grid grid-cols-2 gap-4">
                             <div class="space-y-1.5">
                                 <label class="block text-xs font-label font-bold text-on-surface-variant tracking-wider uppercase ml-1" for="first_name">First Name <span class="text-error">*</span></label>
-                                <input class="browser-default w-full px-4 py-3 bg-surface-container-low border-0 focus:ring-2 focus:ring-primary focus:ring-inset rounded-xl transition-all placeholder:text-outline text-sm text-on-surface" id="first_name" type="text" ng-model="firstName" placeholder="Juan" maxlength="50" required />
+                                <input class="browser-default w-full px-4 py-3 bg-surface-container-low border-0 focus:ring-2 focus:ring-primary focus:ring-inset rounded-xl transition-all placeholder:text-outline text-sm text-on-surface" id="first_name" name="firstName" type="text" ng-model="firstName" placeholder="Juan" maxlength="50" required />
+                                <span class="block text-[10px] text-error font-semibold ml-1" ng-show="regForm.firstName.$invalid && regForm.firstName.$touched">First name is required.</span>
                             </div>
                             <div class="space-y-1.5">
                                 <label class="block text-xs font-label font-bold text-on-surface-variant tracking-wider uppercase ml-1" for="last_name">Last Name <span class="text-error">*</span></label>
-                                <input class="browser-default w-full px-4 py-3 bg-surface-container-low border-0 focus:ring-2 focus:ring-primary focus:ring-inset rounded-xl transition-all placeholder:text-outline text-sm text-on-surface" id="last_name" type="text" ng-model="lastName" placeholder="Dela Cruz" maxlength="50" required />
+                                <input class="browser-default w-full px-4 py-3 bg-surface-container-low border-0 focus:ring-2 focus:ring-primary focus:ring-inset rounded-xl transition-all placeholder:text-outline text-sm text-on-surface" id="last_name" name="lastName" type="text" ng-model="lastName" placeholder="Dela Cruz" maxlength="50" required />
+                                <span class="block text-[10px] text-error font-semibold ml-1" ng-show="regForm.lastName.$invalid && regForm.lastName.$touched">Last name is required.</span>
                             </div>
                         </div>
 
@@ -92,11 +94,11 @@
                         <div class="grid grid-cols-2 gap-4">
                             <div class="space-y-1.5">
                                 <label class="block text-xs font-label font-bold text-on-surface-variant tracking-wider uppercase ml-1" for="middle_name">Middle Name <span class="text-on-surface-variant/50">(Optional)</span></label>
-                                <input class="browser-default w-full px-4 py-3 bg-surface-container-low border-0 focus:ring-2 focus:ring-primary focus:ring-inset rounded-xl transition-all placeholder:text-outline text-sm text-on-surface" id="middle_name" type="text" ng-model="middleName" placeholder="Santos" maxlength="50" />
+                                <input class="browser-default w-full px-4 py-3 bg-surface-container-low border-0 focus:ring-2 focus:ring-primary focus:ring-inset rounded-xl transition-all placeholder:text-outline text-sm text-on-surface" id="middle_name" name="middleName" type="text" ng-model="middleName" placeholder="Santos" maxlength="50" />
                             </div>
                             <div class="space-y-1.5">
                                 <label class="block text-xs font-label font-bold text-on-surface-variant tracking-wider uppercase ml-1" for="suffix">Suffix <span class="text-on-surface-variant/50">(Optional)</span></label>
-                                <input class="browser-default w-full px-4 py-3 bg-surface-container-low border-0 focus:ring-2 focus:ring-primary focus:ring-inset rounded-xl transition-all placeholder:text-outline text-sm text-on-surface" id="suffix" type="text" ng-model="suffix" placeholder="Jr., III" maxlength="10" />
+                                <input class="browser-default w-full px-4 py-3 bg-surface-container-low border-0 focus:ring-2 focus:ring-primary focus:ring-inset rounded-xl transition-all placeholder:text-outline text-sm text-on-surface" id="suffix" name="suffix" type="text" ng-model="suffix" placeholder="Jr., III" maxlength="10" />
                             </div>
                         </div>
 
@@ -104,33 +106,41 @@
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             <div class="space-y-1.5">
                                 <label class="block text-xs font-label font-bold text-on-surface-variant tracking-wider uppercase ml-1" for="emp_id">Employee ID <span class="text-error">*</span></label>
-                                <input class="browser-default w-full px-4 py-3 bg-surface-container-low border-0 focus:ring-2 focus:ring-primary focus:ring-inset rounded-xl transition-all placeholder:text-outline text-sm text-on-surface" id="emp_id" type="text" ng-model="empID" placeholder="1001" maxlength="10" required />
-                                <span class="block text-[10px] text-on-surface-variant/70 ml-1">Numbers only, must be unique.</span>
+                                <input class="browser-default w-full px-4 py-3 bg-surface-container-low border-0 focus:ring-2 focus:ring-primary focus:ring-inset rounded-xl transition-all placeholder:text-outline text-sm text-on-surface" id="emp_id" name="empID" type="text" ng-model="empID" ng-change="onEmpIDInput()" oninput="this.value = this.value.replace(/\D/g, '')" placeholder="1001" maxlength="10" ng-pattern="/^\d+$/" required />
+                                <span class="block text-[10px] text-error font-semibold ml-1" ng-show="regForm.empID.$error.required && regForm.empID.$touched">Employee ID is required.</span>
+                                <span class="block text-[10px] text-on-surface-variant/70 ml-1" ng-hide="regForm.empID.$invalid && regForm.empID.$touched">Numbers only, must be unique.</span>
                             </div>
                             <div class="space-y-1.5">
                                 <label class="block text-xs font-label font-bold text-on-surface-variant tracking-wider uppercase ml-1" for="birthday">Birthday <span class="text-error">*</span></label>
-                                <input class="browser-default w-full px-4 py-3 bg-surface-container-low border-0 focus:ring-2 focus:ring-primary focus:ring-inset rounded-xl transition-all text-sm text-on-surface" id="birthday" type="date" ng-model="birthday" ng-model-options="{ allowInvalid: true }" max="{{today}}" required />
+                                <input class="browser-default w-full px-4 py-3 bg-surface-container-low border-0 focus:ring-2 focus:ring-primary focus:ring-inset rounded-xl transition-all text-sm text-on-surface" id="birthday" name="birthday" type="date" ng-model="birthday" ng-model-options="{ allowInvalid: true }" max="{{today}}" required />
+                                <span class="block text-[10px] text-error font-semibold ml-1" ng-show="regForm.birthday.$invalid && regForm.birthday.$touched">Birthday is required (cannot be future date).</span>
                             </div>
                         </div>
 
                         <!-- Email -->
                         <div class="space-y-1.5">
                             <label class="block text-xs font-label font-bold text-on-surface-variant tracking-wider uppercase ml-1" for="email">Email Address <span class="text-error">*</span></label>
-                            <input class="browser-default w-full px-4 py-3 bg-surface-container-low border-0 focus:ring-2 focus:ring-primary focus:ring-inset rounded-xl transition-all placeholder:text-outline text-sm text-on-surface" id="email" type="email" ng-model="email" placeholder="juan.delacruz@ems.com" maxlength="254" required />
-                            <span class="block text-[10px] text-on-surface-variant/70 ml-1">Enter a valid email address. Must be unique.</span>
+                            <input class="browser-default w-full px-4 py-3 bg-surface-container-low border-0 focus:ring-2 focus:ring-primary focus:ring-inset rounded-xl transition-all placeholder:text-outline text-sm text-on-surface" id="email" name="email" type="email" ng-model="email" placeholder="juan.delacruz@ems.com" maxlength="254" required />
+                            <span class="block text-[10px] text-error font-semibold ml-1" ng-show="regForm.email.$error.email && regForm.email.$touched">
+                                Please enter a valid email address.
+                            </span>
                         </div>
 
                         <!-- Passwords -->
                         <div class="grid grid-cols-2 gap-4">
                             <div class="space-y-1.5">
                                 <label class="block text-xs font-label font-bold text-on-surface-variant tracking-wider uppercase ml-1" for="password">Password <span class="text-error">*</span></label>
-                                <input class="browser-default w-full px-4 py-3 bg-surface-container-low border-0 focus:ring-2 focus:ring-primary focus:ring-inset rounded-xl transition-all placeholder:text-outline text-sm text-on-surface" id="password" type="password" ng-model="password" placeholder="********" maxlength="254" required />
-                                <span class="block text-[10px] text-on-surface-variant/70 ml-1">8+ characters, upper/lowercase, number, special.</span>
+                                <input class="browser-default w-full px-4 py-3 bg-surface-container-low border-0 focus:ring-2 focus:ring-primary focus:ring-inset rounded-xl transition-all placeholder:text-outline text-sm text-on-surface" id="password" name="password" type="password" ng-model="password" placeholder="********" maxlength="254" ng-pattern="/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/" required />
+                                <span class="block text-[10px] text-error font-semibold ml-1" ng-show="regForm.password.$error.required && regForm.password.$touched">Password is required.</span>
+                                <span class="block text-[10px] text-error font-semibold ml-1" ng-show="regForm.password.$error.pattern && regForm.password.$touched">8+ chars (upper, lower, digit, special).</span>
+                                <span class="block text-[10px] text-on-surface-variant/70 ml-1" ng-hide="regForm.password.$invalid && regForm.password.$touched">8+ characters, upper/lowercase, number, special.</span>
                             </div>
                             <div class="space-y-1.5">
                                 <label class="block text-xs font-label font-bold text-on-surface-variant tracking-wider uppercase ml-1" for="confirm_password">Confirm Password <span class="text-error">*</span></label>
-                                <input class="browser-default w-full px-4 py-3 bg-surface-container-low border-0 focus:ring-2 focus:ring-primary focus:ring-inset rounded-xl transition-all placeholder:text-outline text-sm text-on-surface" id="confirm_password" type="password" ng-model="confirmPassword" placeholder="********" required />
-                                <span class="block text-[10px] text-on-surface-variant/70 ml-1">Must match the password.</span>
+                                <input class="browser-default w-full px-4 py-3 bg-surface-container-low border-0 focus:ring-2 focus:ring-primary focus:ring-inset rounded-xl transition-all placeholder:text-outline text-sm text-on-surface" id="confirm_password" name="confirmPassword" type="password" ng-model="confirmPassword" placeholder="********" maxlength="254" ng-class="{'border-error-force': (confirmPassword !== password) && regForm.confirmPassword.$touched}" required />
+                                <span class="block text-[10px] text-error font-semibold ml-1" ng-show="regForm.confirmPassword.$error.required && regForm.confirmPassword.$touched">Confirm password is required.</span>
+                                <span class="block text-[10px] text-error font-semibold ml-1" ng-show="!regForm.confirmPassword.$error.required && confirmPassword !== password && regForm.confirmPassword.$touched">Passwords do not match.</span>
+                                <span class="block text-[10px] text-on-surface-variant/70 ml-1" ng-hide="(regForm.confirmPassword.$invalid || (confirmPassword && confirmPassword !== password)) && regForm.confirmPassword.$touched">Must match the password.</span>
                             </div>
                         </div>
 
@@ -146,18 +156,22 @@
                                 <div class="grid grid-cols-2 gap-4">
                                     <div class="space-y-1.5">
                                         <label class="block text-xs font-label font-bold text-on-surface-variant tracking-wider uppercase ml-1" for="position">Position <span class="text-error">*</span></label>
-                                        <input class="browser-default w-full px-4 py-3 bg-surface-container-low border-0 focus:ring-2 focus:ring-primary focus:ring-inset rounded-xl transition-all placeholder:text-outline text-sm text-on-surface" id="position" type="text" ng-model="position" placeholder="Developer" maxlength="50" required />
+                                        <input class="browser-default w-full px-4 py-3 bg-surface-container-low border-0 focus:ring-2 focus:ring-primary focus:ring-inset rounded-xl transition-all placeholder:text-outline text-sm text-on-surface" id="position" name="position" type="text" ng-model="position" placeholder="Developer" maxlength="50" required />
+                                        <span class="block text-[10px] text-error font-semibold ml-1" ng-show="regForm.position.$invalid && regForm.position.$touched">Position is required.</span>
                                     </div>
                                     <div class="space-y-1.5">
                                         <label class="block text-xs font-label font-bold text-on-surface-variant tracking-wider uppercase ml-1" for="department">Department <span class="text-error">*</span></label>
-                                        <input class="browser-default w-full px-4 py-3 bg-surface-container-low border-0 focus:ring-2 focus:ring-primary focus:ring-inset rounded-xl transition-all placeholder:text-outline text-sm text-on-surface" id="department" type="text" ng-model="department" placeholder="IT" maxlength="50" required />
+                                        <input class="browser-default w-full px-4 py-3 bg-surface-container-low border-0 focus:ring-2 focus:ring-primary focus:ring-inset rounded-xl transition-all placeholder:text-outline text-sm text-on-surface" id="department" name="department" type="text" ng-model="department" placeholder="IT" maxlength="50" required />
+                                        <span class="block text-[10px] text-error font-semibold ml-1" ng-show="regForm.department.$invalid && regForm.department.$touched">Department is required.</span>
                                     </div>
                                 </div>
 
                                 <div class="space-y-1.5">
                                     <label class="block text-xs font-label font-bold text-on-surface-variant tracking-wider uppercase ml-1" for="contact_number">Contact Number <span class="text-error">*</span></label>
-                                    <input class="browser-default w-full px-4 py-3 bg-surface-container-low border-0 focus:ring-2 focus:ring-primary focus:ring-inset rounded-xl transition-all placeholder:text-outline text-sm text-on-surface" id="contact_number" type="tel" ng-model="contactNumber" placeholder="09171234567" required />
-                                    <span class="block text-[10px] text-on-surface-variant/70 ml-1">Must start with 09, exactly 11 digits.</span>
+                                    <input class="browser-default w-full px-4 py-3 bg-surface-container-low border-0 focus:ring-2 focus:ring-primary focus:ring-inset rounded-xl transition-all placeholder:text-outline text-sm text-on-surface" id="contact_number" name="contactNumber" type="tel" ng-model="contactNumber" ng-change="onContactNumberInput()" oninput="this.value = this.value.replace(/\D/g, '')" placeholder="09171234567" maxlength="11" ng-pattern="/^09\d{9}$/" required />
+                                    <span class="block text-[10px] text-error font-semibold ml-1" ng-show="regForm.contactNumber.$error.required && regForm.contactNumber.$touched">Contact number is required.</span>
+                                    <span class="block text-[10px] text-error font-semibold ml-1" ng-show="regForm.contactNumber.$error.pattern && regForm.contactNumber.$touched">Must start with 09 and be exactly 11 digits.</span>
+                                    <span class="block text-[10px] text-on-surface-variant/70 ml-1" ng-hide="regForm.contactNumber.$invalid && regForm.contactNumber.$touched">Must start with 09, exactly 11 digits.</span>
                                 </div>
                             </div>
                         </div>
